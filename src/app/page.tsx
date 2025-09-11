@@ -1,280 +1,263 @@
-// // "use client";
-
-// // import { getTransactions, clearTransactions } from "@/lib/storage";
-// // import { useState, useEffect } from "react";
-// // import ExpenseCategoryChart from "@/components/Charts/ExpenseCategoryChart";
-// // import ContributionVsExpenseChart from "@/components/Charts/ContributionVsExpenseChart";
-
-// // export default function Dashboard() {
-// //   const [transactions, setTransactions] = useState<any[]>([]);
-
-// //   useEffect(() => {
-// //     setTransactions(getTransactions());
-// //   }, []);
-
-// //   const contributions = transactions
-// //     .filter((t) => t.type === "contribution")
-// //     .reduce((acc, t) => acc + t.amount, 0);
-
-// //   const expenses = transactions
-// //     .filter((t) => t.type === "expense")
-// //     .reduce((acc, t) => acc + t.amount, 0);
-
-// //   const balance = contributions - expenses;
-
-// //   const handleClear = () => {
-// //     clearTransactions();
-// //     setTransactions([]);
-// //   };
-
-// //   return (
-// //     <div className="space-y-6">
-// //       <h1 className="text-2xl font-bold">Dashboard</h1>
-// //       <div className="grid grid-cols-3 gap-4 text-center">
-// //         <div className="p-4 bg-green-200 rounded">
-// //           <p>Total Contributions</p>
-// //           <p className="text-xl font-bold">₵{contributions}</p>
-// //         </div>
-// //         <div className="p-4 bg-red-200 rounded">
-// //           <p>Total Expenses</p>
-// //           <p className="text-xl font-bold">₵{expenses}</p>
-// //         </div>
-// //         <div className="p-4 bg-blue-200 rounded">
-// //           <p>Balance</p>
-// //           <p className="text-xl font-bold">₵{balance}</p>
-// //         </div>
-// //       </div>
-
-// //       {/* Charts */}
-// //       {transactions.length > 0 && (
-// //         <div className="grid gap-6 md:grid-cols-2">
-// //           <ExpenseCategoryChart transactions={transactions} />
-// //           <ContributionVsExpenseChart transactions={transactions} />
-// //         </div>
-// //       )}
-
-// //       <button
-// //         onClick={handleClear}
-// //         className="px-4 py-2 bg-gray-600 text-gray-800 rounded"
-// //       >
-// //         Reset Data
-// //       </button>
-// //     </div>
-// //   );
-// // }
-
 // "use client";
 
 // import { getTransactions, clearTransactions } from "@/lib/storage";
 // import { useState, useEffect } from "react";
 // import ExpenseCategoryChart from "@/components/Charts/ExpenseCategoryChart";
 // import ContributionVsExpenseChart from "@/components/Charts/ContributionVsExpenseChart";
-// import { TwitterIcon } from "lucide-react";
+// import { Book, PlusCircle, UserPlus, RotateCcw } from "lucide-react";
 
 // export default function Dashboard() {
-//   const [transactions, setTransactions] = useState<any[]>([]);
-
-//   useEffect(() => {
-//     setTransactions(getTransactions());
-//   }, []);
-
-//   const contributions = transactions
-//     .filter((t) => t.type === "contribution")
-//     .reduce((acc, t) => acc + t.amount, 0);
-
-//   const expenses = transactions
-//     .filter((t) => t.type === "expense")
-//     .reduce((acc, t) => acc + t.amount, 0);
-
-//   const balance = contributions - expenses;
-
-//   const handleClear = () => {
-//     clearTransactions();
-//     setTransactions([]);
-//   };
-
 //   return (
-//     <div className="min-h-screen bg-gray-100 flex flex-col items-center">
-//       {/* Header */}
-//       <div className="w-full max-w-5xl flex justify-between px-6 py-4 text-sm text-gray-600">
-//         <a href="#" className="underline">
-//           Made with 💙 by Patrick Nyame
-//         </a>
-//         <span className="font-medium">Share</span>
-//       </div>
-
-//       {/* Logo */}
-//       <div className="mt-6">
-//         <div className="w-16 h-16 rounded-full bg-[#0099ff] flex items-center justify-center shadow-md">
-//           <span className="text-white font-bold text-xl">₵</span>
+//     <div className="min-h-screen flex flex-col">
+//       {/* Top Section (Gray Half) */}
+//       <div className="bg-gray-100 flex flex-col items-center py-8 px-4">
+//         {/* Header */}
+//         <div className="w-full max-w-5xl flex justify-between px-2 sm:px-6 text-sm text-gray-600">
+//           <span className="hover:text-[#0099ff] transition">
+//             Made with 💙 by
+//           </span>
+//           <a href="#" className="underline hover:text-[#0099ff] transition">
+//             Patrick Nyame
+//           </a>
+//           <span className="font-medium cursor-pointer hover:text-[#0099ff] transition">
+//             Share
+//           </span>
 //         </div>
-//       </div>
 
-//       {/* Title */}
-//       <h1 className="text-3xl font-bold mt-4 text-gray-800">
-//         Track Your Finances
-//       </h1>
-
-//       {/* Stat Cards */}
-//       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-10 w-full max-w-5xl px-6">
-//         <div className="bg-white rounded-xl shadow p-6 text-center border-t-4 border-green-400">
-//           <p className="text-gray-600">Total Contributions</p>
-//           <p className="text-2xl font-bold text-green-600">₵{contributions}</p>
-//         </div>
-//         <div className="bg-white rounded-xl shadow p-6 text-center border-t-4 border-red-400">
-//           <p className="text-gray-600">Total Expenses</p>
-//           <p className="text-2xl font-bold text-red-600">₵{expenses}</p>
-//         </div>
-//         <div className="bg-white rounded-xl shadow p-6 text-center border-t-4 border-[#0099ff]">
-//           <p className="text-gray-600">Balance</p>
-//           <p className="text-2xl font-bold text-[#0099ff]">₵{balance}</p>
-//         </div>
-//       </div>
-
-//       {/* Charts */}
-//       {transactions.length > 0 && (
-//         <div className="grid gap-6 md:grid-cols-2 w-full max-w-5xl px-6 mt-10">
-//           <div className="bg-white rounded-xl shadow p-4">
-//             <ExpenseCategoryChart transactions={transactions} />
-//           </div>
-//           <div className="bg-white rounded-xl shadow p-4">
-//             <ContributionVsExpenseChart transactions={transactions} />
+//         {/* Logo */}
+//         <div className="mt-8">
+//           <div className="w-16 h-16 rounded-full bg-[#0099ff] flex items-center justify-center shadow-md">
+//             <span className="text-white font-bold text-xl">₵</span>
 //           </div>
 //         </div>
-//       )}
 
-//       {/* Floating Reset Button */}
-//       <div className="fixed bottom-10">
-//         <button
-//           onClick={handleClear}
-//           className="w-14 h-14 rounded-full bg-white shadow-lg flex items-center justify-center border border-gray-200 hover:scale-105 transition"
-//         >
-//           <span className="text-[#0099ff] font-bold">↻</span>
-//         </button>
+//         {/* Title */}
+//         <h1 className="text-3xl font-bold mt-4 text-gray-800 text-center">
+//           Track Your Finances
+//         </h1>
+
+//         {/* Action Cards */}
+//         <div className="bg-white w-full max-w-4xl px-4 sm:px-6 mt-10 py-8 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.05)] mx-auto">
+//           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+//             {/* Pages */}
+//             <div className="bg-gray-100 text-gray-800 rounded-xl shadow-sm p-6 text-center cursor-pointer hover:shadow-md hover:scale-[1.02] transition">
+//               <p className="font-semibold flex items-center justify-center gap-2">
+//                 <Book size={22} className="text-[#0099ff]" />
+//                 Go to Pages
+//               </p>
+//             </div>
+
+//             {/* Add Expense */}
+//             <div className="bg-gray-100 text-gray-800 rounded-xl shadow-sm p-6 text-center cursor-pointer hover:shadow-md hover:scale-[1.02] transition">
+//               <p className="font-semibold flex items-center justify-center gap-2">
+//                 <PlusCircle size={22} className="text-[#0099ff]" />
+//                 Add Expense
+//               </p>
+//             </div>
+
+//             {/* Add Contributor */}
+//             <div className="bg-gray-100 text-gray-800 rounded-xl shadow-sm p-6 text-center cursor-pointer hover:shadow-md hover:scale-[1.02] transition">
+//               <p className="font-semibold flex items-center justify-center gap-2">
+//                 <UserPlus size={22} className="text-[#0099ff]" />
+//                 Add Contributor
+//               </p>
+//             </div>
+//           </div>
+
+//           {/* Small Center Logo */}
+//         </div>
 //       </div>
 //     </div>
 //   );
 // }
 
+// "use client";
+
+// import {
+//   LogoHouseSplitA,
+//   LogoHouseSplitB,
+//   LogoHouseSplitC,
+// } from "@/components/Logo";
+// import {
+//   Book,
+//   PlusCircle,
+//   UserPlus,
+//   Share2,
+//   User2,
+//   Users2Icon,
+// } from "lucide-react";
+// import Link from "next/link";
+
+// export default function Dashboard() {
+//   return (
+//     <div className="min-h-screen flex flex-col bg-gray-50">
+//       {/* Header */}
+//       <header className="w-full max-w-6xl mx-auto flex justify-between items-center px-6 py-6 text-sm text-gray-600">
+//         <span className="hover:text-[#0099ff] ">
+//           Made with 💙 by{" "}
+//           <a href="#" className="font-semibold underline hover:text-[#0099ff] ">
+//             Patrick Nyame
+//           </a>
+//         </span>
+//         <button className="flex items-center gap-1 hover:text-[#0099ff] ">
+//           <Share2 size={16} />
+//           Share
+//         </button>
+//       </header>
+
+//       {/* Hero */}
+//       <section className="flex flex-col items-center justify-center mt-12 px-4">
+//         {/* Logo */}
+//         <LogoHouseSplitA />
+
+//         {/* Title */}
+//         <h1 className="mt-8 text-4xl font-extrabold text-gray-800 text-center tracking-tight">
+//           Track Your Finances
+//         </h1>
+//         <p className="mt-3 text-gray-500 text-center max-w-md text-lg">
+//           A clean, minimal way to monitor your expenses and contributions.
+//         </p>
+//       </section>
+
+//       {/* Action Cards */}
+//       <section className="mt-16 w-full max-w-5xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
+//         {/* Individual */}
+//         <Link
+//           href="/individual"
+//           className="group bg-white border border-gray-200 rounded-2xl p-8 shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-lg hover:border-[#0099ff]/50 hover:-translate-y-1.5 transition duration-300 transform flex flex-col"
+//         >
+//           <div className="flex items-center gap-3 font-semibold text-gray-700 group-hover:text-[#0099ff]">
+//             <User2 size={22} className="text-[#0099ff]" />
+//             Individual
+//           </div>
+//           <p className="mt-2 text-sm text-gray-500">
+//             Track your personal contributions and expenses in one place.
+//           </p>
+//         </Link>
+
+//         {/* House Split */}
+//         <Link
+//           href="/house-split"
+//           className="group bg-white border border-gray-200 rounded-2xl p-8 shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-lg hover:border-[#0099ff]/50 hover:-translate-y-1.5 transition duration-300 transform flex flex-col"
+//         >
+//           <div className="flex items-center gap-3 font-semibold text-gray-700 group-hover:text-[#0099ff]">
+//             <Users2Icon size={22} className="text-[#0099ff]" />
+//             House Split
+//           </div>
+//           <p className="mt-2 text-sm text-gray-500">
+//             Manage shared expenses and group contributions seamlessly.
+//           </p>
+//         </Link>
+//       </section>
+//     </div>
+//   );
+// }
 "use client";
 
-import { getTransactions, clearTransactions } from "@/lib/storage";
-import { useState, useEffect } from "react";
-import ExpenseCategoryChart from "@/components/Charts/ExpenseCategoryChart";
-import ContributionVsExpenseChart from "@/components/Charts/ContributionVsExpenseChart";
-import { Book } from "lucide-react";
+import { LogoHouseSplitA, LogoHouseSplitB } from "@/components/Logo";
+import { Share2, User2, Users2Icon } from "lucide-react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { getTransactions } from "@/lib/storage";
 
 export default function Dashboard() {
-  const [transactions, setTransactions] = useState<any[]>([]);
+  const [hasIndividualData, setHasIndividualData] = useState(false);
+  const [hasHouseData, setHasHouseData] = useState(false);
 
   useEffect(() => {
-    setTransactions(getTransactions());
+    const txs = getTransactions();
+    setHasIndividualData(txs.some((t) => t.mode === "individual"));
+    setHasHouseData(txs.some((t) => t.mode === "house"));
   }, []);
 
-  const contributions = transactions
-    .filter((t) => t.type === "contribution")
-    .reduce((acc, t) => acc + t.amount, 0);
-
-  const expenses = transactions
-    .filter((t) => t.type === "expense")
-    .reduce((acc, t) => acc + t.amount, 0);
-
-  const balance = contributions - expenses;
-
-  const handleClear = () => {
-    clearTransactions();
-    setTransactions([]);
-  };
-
   return (
-    <div className="min-h-screen flex flex-col">
-      {/* Top Section (Gray Half) */}
-      <div className="bg-gray-100 flex flex-col items-center py-16">
-        {/* Header */}
-        <div className="w-full max-w-5xl flex justify-between px-6 text-sm text-gray-600">
-          <a href="#" className="underline">
-            Made with 💙 by Patrick Nyame
+    <div className="min-h-screen flex flex-col bg-white">
+      {/* Header */}
+      <header className="w-full max-w-6xl mx-auto flex justify-between items-center px-6 py-6 text-sm text-gray-600">
+        <span className="hover:text-[#0099ff] ">
+          Made with 💙 by{" "}
+          <a href="#" className="font-semibold underline hover:text-[#0099ff] ">
+            Patrick Nyame
           </a>
-          <span className="font-medium">Share</span>
-        </div>
+        </span>
+        <button className="flex items-center gap-1 hover:text-[#0099ff] ">
+          <Share2 size={16} />
+          Share
+        </button>
+      </header>
 
+      {/* Hero */}
+      <section className="flex flex-col items-center justify-center mt-12 px-4">
         {/* Logo */}
-        <div className="mt-6">
-          <div className="w-16 h-16 rounded-full bg-[#0099ff] flex items-center justify-center shadow-md">
-            <span className="text-white font-bold text-xl">₵</span>
-          </div>
-        </div>
+        <LogoHouseSplitB />
 
         {/* Title */}
-        <h1 className="text-3xl font-bold mt-4 text-gray-800">
+        <h1 className="mt-8 text-4xl font-extrabold text-gray-800 text-center tracking-tight">
           Track Your Finances
         </h1>
+        <p className="mt-3 text-gray-500 text-center max-w-md text-lg">
+          A clean, minimal way to monitor your expenses and contributions.
+        </p>
+      </section>
 
-        {/* Action Cards */}
-        <div className="bg-white w-full max-w-5xl  px-6 mt-10 py-8 rounded-2xl shadow mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full max-w-5xl px-6 mt-10 ">
-            <div className="bg-gray-100  text-gray-800 rounded-xl shadow p-6 text-center cursor-pointer transition">
-              <p className="font-semibold">
-                Go to Pages <Book size={30} className="text-[#0099ff]" />
-              </p>
-            </div>
-            <div className="bg-gray-100 text-gray-800 rounded-xl shadow p-6 text-center cursor-pointer transition">
-              <p className="font-semibold">Add Expense</p>
-            </div>
-            <div className="bg-gray-100 text-gray-800 rounded-xl shadow p-6 text-center cursor-pointer transition">
-              <p className="font-semibold">Add Contributor</p>
-            </div>
-            <div className="inline">
-              <div className="w-16 h-16 rounded-full bg-[#0099ff] flex items-center justify-center shadow-md">
-                <span className="text-white font-bold text-xl">₵</span>
-              </div>
-            </div>
+      {/* Action Cards */}
+      <section className="mt-16 w-full max-w-5xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
+        {/* Individual */}
+        <div className="group bg-white border border-gray-200 rounded-2xl p-8 shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-lg hover:border-[#0099ff]/50 hover:-translate-y-1.5 transition duration-300 transform flex flex-col">
+          <div className="flex items-center gap-3 font-semibold text-gray-700 group-hover:text-[#0099ff]">
+            <User2 size={22} className="text-[#0099ff]" />
+            Individual
           </div>
-        </div>
-      </div>
-
-      {/* Bottom Section (White) */}
-      <div className="bg-white flex flex-col items-center py-16">
-        {/* Stat Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full mb-10 max-w-5xl px-6">
-          <div className="bg-white rounded-xl shadow p-6 text-center border-t-4 border-green-400">
-            <p className="text-gray-600">Total Contributions</p>
-            <p className="text-2xl font-bold text-green-600">
-              ₵{contributions}
-            </p>
-          </div>
-          <div className="bg-white rounded-xl shadow p-6 text-center border-t-4 border-red-400">
-            <p className="text-gray-600">Total Expenses</p>
-            <p className="text-2xl font-bold text-red-600">₵{expenses}</p>
-          </div>
-          <div className="bg-white rounded-xl shadow p-6 text-center border-t-4 border-[#0099ff]">
-            <p className="text-gray-600">Balance</p>
-            <p className="text-2xl font-bold text-[#0099ff]">₵{balance}</p>
+          <p className="mt-2 text-sm text-gray-500 flex-1">
+            Track your personal contributions and expenses in one place.
+          </p>
+          <div className="mt-4">
+            {hasIndividualData ? (
+              <Link
+                href="/individual"
+                className="inline-block px-4 py-2 bg-[#0099ff] text-white text-sm rounded-lg shadow hover:bg-[#0077cc] transition"
+              >
+                Continue
+              </Link>
+            ) : (
+              <Link
+                href="/individual"
+                className="inline-block px-4 py-2 bg-gray-200 text-gray-700 text-sm rounded-lg shadow hover:bg-gray-300 transition"
+              >
+                Start
+              </Link>
+            )}
           </div>
         </div>
 
-        {/* Charts */}
-        {transactions.length > 0 && (
-          <div className="grid gap-6 md:grid-cols-2 w-full max-w-5xl px-6">
-            <div className="bg-white rounded-xl shadow p-4">
-              <ExpenseCategoryChart transactions={transactions} />
-            </div>
-            <div className="bg-white rounded-xl shadow p-4">
-              <ContributionVsExpenseChart transactions={transactions} />
-            </div>
+        {/* House Split */}
+        <div className="group bg-white border border-gray-200 rounded-2xl p-8 shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-lg hover:border-[#0099ff]/50 hover:-translate-y-1.5 transition duration-300 transform flex flex-col">
+          <div className="flex items-center gap-3 font-semibold text-gray-700 group-hover:text-[#0099ff]">
+            <Users2Icon size={22} className="text-[#0099ff]" />
+            House Split
           </div>
-        )}
-      </div>
-
-      {/* Floating Reset Button */}
-      <div className="fixed bottom-10 right-10">
-        <button
-          onClick={handleClear}
-          className="w-14 h-14 rounded-full bg-white shadow-lg flex items-center justify-center border border-gray-200 hover:scale-105 transition"
-        >
-          <span className="text-[#0099ff] font-bold">↻</span>
-        </button>
-      </div>
+          <p className="mt-2 text-sm text-gray-500 flex-1">
+            Manage shared expenses and group contributions seamlessly.
+          </p>
+          <div className="mt-4">
+            {hasHouseData ? (
+              <Link
+                href="/house-split"
+                className="inline-block px-4 py-2 bg-[#0099ff] text-white text-sm rounded-lg shadow hover:bg-[#0077cc] transition"
+              >
+                Continue
+              </Link>
+            ) : (
+              <Link
+                href="/house-split"
+                className="inline-block px-4 py-2 bg-gray-200 text-gray-700 text-sm rounded-lg shadow hover:bg-gray-300 transition"
+              >
+                Start
+              </Link>
+            )}
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

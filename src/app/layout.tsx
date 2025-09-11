@@ -1,5 +1,40 @@
+// import "./globals.css";
+// import Navbar from "@/components/Navbar";
+
+// export const metadata = {
+//   title: "HouseSplit",
+//   description: "Expense Splitter App",
+// };
+
+// export default function RootLayout({
+//   children,
+// }: {
+//   children: React.ReactNode;
+// }) {
+//   return (
+//     <html lang="en">
+//       <body className="min-h-screen bg-gray-100">
+//         <Navbar />
+//         <main className="max-w-7xl mx-auto">{children}</main>
+//       </body>
+//     </html>
+//   );
+// }
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import { Inter, Plus_Jakarta_Sans } from "next/font/google";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const plusJakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-plus-jakarta",
+  display: "swap",
+});
 
 export const metadata = {
   title: "HouseSplit",
@@ -12,10 +47,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="min-h-screen bg-gray-100">
+    <html lang="en" className={`${inter.variable} ${plusJakarta.variable}`}>
+      <body className="min-h-screen bg-gray-50 text-gray-800 antialiased font-sans">
+        {/* Navbar */}
         <Navbar />
-        <main className="max-w-7xl mx-auto p-4">{children}</main>
+
+        {/* Main Content */}
+        <main className="w-full">{children}</main>
       </body>
     </html>
   );
