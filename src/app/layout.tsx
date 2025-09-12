@@ -23,6 +23,7 @@
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
+import { ToastProvider } from "@/components/ToastProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -53,7 +54,9 @@ export default function RootLayout({
         <Navbar />
 
         {/* Main Content */}
-        <main className="w-full">{children}</main>
+        <main className="w-full">
+          <ToastProvider>{children}</ToastProvider>
+        </main>
       </body>
     </html>
   );
