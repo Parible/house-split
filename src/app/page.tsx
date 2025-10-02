@@ -167,7 +167,7 @@ export default function Dashboard() {
   useEffect(() => {
     const txs = getTransactions();
     setHasIndividualData(txs.some((t) => t.mode === "individual"));
-    setHasHouseData(txs.some((t) => t.mode === "house"));
+    setHasHouseData(txs.some((t) => t.mode === "house-split"));
   }, []);
 
   return (

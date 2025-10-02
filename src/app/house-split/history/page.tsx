@@ -74,7 +74,7 @@ export default function HouseHistoryPage() {
   const [transactions, setTransactions] = useState<any[]>([]);
 
   useEffect(() => {
-    setTransactions(getTransactions().filter((t) => t.mode === "house"));
+    setTransactions(getTransactions().filter((t) => t.mode === "house-split"));
   }, []);
 
   return (

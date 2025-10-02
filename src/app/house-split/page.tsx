@@ -392,7 +392,7 @@ import Dashboard from "@/components/Dashboard";
 export default function HouseDashboard() {
   return (
     <Dashboard
-      mode="house"
+      mode="house-split"
       title="House Split"
       description="Track with family, friends and roommates"
       breadcrumb={[{ label: "Home", href: "/" }, { label: "House Split" }]}

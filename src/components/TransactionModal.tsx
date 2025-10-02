@@ -14,7 +14,7 @@ export default function TransactionModal({
   onClose,
 }: {
   type: "contribution" | "expense";
-  mode: "individual" | "house";
+  mode: "individual" | "house-split";
   isOpen: boolean;
   onClose: () => void;
 }) {
@@ -27,20 +27,24 @@ export default function TransactionModal({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!amount || (mode === "house" && !contributor)) return;
+    if (!amount) return;
+    if (mode === "house-split" && !contributor) return;
 
     saveTransaction({
       id: uuidv4(),
       type,
       name,
       category: type === "expense" ? category : undefined,
-      contributor: mode === "house" ? contributor : undefined,
+      contributor: mode === "house-split" ? contributor : undefined,
       amount: Number(amount),
       date: new Date().toISOString(),
       mode,
     });
 
     onClose();
+
+    // Trigger global sync
+    window.dispatchEvent(new Event("storage"));
   };
 
   return (
@@ -64,14 +68,14 @@ export default function TransactionModal({
             {type === "contribution" ? "Add Contribution" : "Add Expense"}
           </h2>
           <p className="text-sm text-gray-500">
-            {mode === "house"
-              ? "For the shared house split"
+            {mode === "house-split"
+              ? "For the shared house-split split"
               : "For your personal tracking"}
           </p>
         </div>
 
-        {/* Contributor (House only) */}
-        {mode === "house" && (
+        {/* Contributor (House-split only, both contrib + expense) */}
+        {mode === "house-split" && (
           <div>
             <label className="block text-sm font-medium text-gray-600 mb-1">
               Contributor
@@ -96,7 +100,7 @@ export default function TransactionModal({
             placeholder={
               type === "expense"
                 ? "e.g. Groceries, Rent"
-                : "e.g. Spending Money"
+                : "e.g. Spending, Housekeeping"
             }
             className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-[#0099ff] focus:outline-none"
             value={name}
@@ -147,9 +151,7 @@ export default function TransactionModal({
           </button>
           <button
             type="submit"
-            className={`px-5 py-2.5 rounded-lg text-white font-medium shadow transition ${
-              type === "contribution" ? "bg-[#0099ff] " : "bg-[#0099ff]"
-            }`}
+            className="px-5 py-2.5 rounded-lg bg-[#0099ff] text-white font-medium shadow hover:bg-[#0080d6] transition"
           >
             Save
           </button>

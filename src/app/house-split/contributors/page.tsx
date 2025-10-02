@@ -7,7 +7,7 @@ export default function ContributorsPage() {
   const [contributors, setContributors] = useState<any[]>([]);
 
   useEffect(() => {
-    const txs = getTransactions().filter((t) => t.mode === "house");
+    const txs = getTransactions().filter((t) => t.mode === "house-split");
     const grouped: Record<string, { contributions: number; expenses: number }> =
       {};
 

@@ -1,66 +1,3 @@
-// "use client";
-
-// import { useState } from "react";
-// import { saveTransaction } from "@/lib/storage";
-// import { useRouter } from "next/navigation";
-// import { v4 as uuidv4 } from "uuid";
-
-// const categories = ["Food", "Utilities", "Transport", "Entertainment", "Other"];
-
-// export default function ExpenseForm() {
-//   const [name, setName] = useState("");
-//   const [category, setCategory] = useState("Other");
-//   const [amount, setAmount] = useState("");
-//   const router = useRouter();
-
-//   const handleSubmit = (e: React.FormEvent) => {
-//     e.preventDefault();
-//     if (!name || !amount) return;
-//     saveTransaction({
-//       id: uuidv4(),
-//       type: "expense",
-//       name,
-//       category,
-//       amount: Number(amount),
-//       date: new Date().toISOString(),
-//     });
-//     router.push("/");
-//   };
-
-//   return (
-//     <form onSubmit={handleSubmit} className="p-4 space-y-4">
-//       <input
-//         type="text"
-//         placeholder="Expense Name"
-//         className="w-full p-2 border rounded"
-//         value={name}
-//         onChange={(e) => setName(e.target.value)}
-//       />
-//       <select
-//         className="w-full p-2 border rounded"
-//         value={category}
-//         onChange={(e) => setCategory(e.target.value)}
-//       >
-//         {categories.map((c) => (
-//           <option key={c} value={c}>
-//             {c}
-//           </option>
-//         ))}
-//       </select>
-//       <input
-//         type="number"
-//         placeholder="Amount (₵)"
-//         className="w-full p-2 border rounded"
-//         value={amount}
-//         onChange={(e) => setAmount(e.target.value)}
-//       />
-//       <button type="submit" className="px-4 py-2 bg-red-600 text-white rounded">
-//         Save Expense
-//       </button>
-//     </form>
-//   );
-// }
-
 "use client";
 
 import { useState } from "react";
@@ -76,7 +13,7 @@ export default function TransactionModal({
   onClose,
 }: {
   type: "contribution" | "expense";
-  mode: "individual" | "house";
+  mode: "individual" | "house-split";
   isOpen: boolean;
   onClose: () => void;
 }) {
@@ -89,14 +26,14 @@ export default function TransactionModal({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!amount || (mode === "house" && !contributor)) return;
+    if (!amount || (mode === "house-split" && !contributor)) return;
 
     saveTransaction({
       id: uuidv4(),
       type,
       name,
       category: type === "expense" ? category : undefined,
-      contributor: mode === "house" ? contributor : undefined,
+      contributor: mode === "house-split" ? contributor : undefined,
       amount: Number(amount),
       date: new Date().toISOString(),
       mode,
@@ -111,7 +48,7 @@ export default function TransactionModal({
         onSubmit={handleSubmit}
         className="bg-white p-6 rounded-lg shadow-lg w-96 space-y-4"
       >
-        {mode === "house" && (
+        {mode === "house-split" && (
           <input
             type="text"
             placeholder="Contributor Name"
